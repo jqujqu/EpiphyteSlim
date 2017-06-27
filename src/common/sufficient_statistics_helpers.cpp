@@ -25,6 +25,8 @@
 #include <vector>
 #include <string>
 
+using std::vector;
+
 std::ostream &
 operator<<(std::ostream &out, const pair_state &ps) {
   return out << ps.tostring();
@@ -47,7 +49,8 @@ combine_horiz_and_vert_deriv(const param_set &ps, const size_t &node_id,
                              triple_state &GP_drate, triple_state &GP_dg0,
                              triple_state &GP_dg1, triple_state &GP_dT) {
   // deriv for: (rate0, g0, g1, T)
-  pair_state G(ps.g0[node_id], 1.0 - ps.g0[node_id], 1.0 - ps.g1[node_id], ps.g1[node_id]);
+  pair_state G(ps.g0[node_id], 1.0 - ps.g0[node_id],
+               1.0 - ps.g1[node_id], ps.g1[node_id]);
   pair_state Q(-ps.rate0, ps.rate0, 1.0 - ps.rate0, ps.rate0 - 1.0);
 
   pair_state GP_denom;
@@ -159,4 +162,27 @@ get_transition_matrices(const param_set &ps,
     pair_state G(ps.g0[i], 1.0 - ps.g0[i], 1.0 - ps.g1[i], ps.g1[i]);
     combine_horiz_and_vert(G, P[i], GP[i]);
   }
+}
+
+
+
+string
+dinuc_stat_tostring(const vector<vector<double> > &root_dinuc,
+                    const vector<vector<vector<double> > > &pair_dinuc) {
+  std::ostringstream oss;
+  const size_t n_nodes = pair_dinuc.size();
+  oss << "root dinucleotides:\n"
+      << "[" << root_dinuc[0][0] << ",\t" << root_dinuc[0][1] << ",\n"
+      << " " << root_dinuc[1][0] << ",\t" << root_dinuc[1][1] <<"]\n";
+  for (size_t i = 1; i < n_nodes; ++i) {
+    oss << "pair dinucleotides node-"<< i << ":\n";
+    oss << " 00\t01\t10\t11\n";
+    for (size_t j = 0; j < 4; ++j) {
+      oss << "[";
+      for (size_t k = 0; k < 4; ++k)
+        oss << pair_dinuc[i][j][k] << "\t";
+      oss << "]\n";
+    }
+  }
+  return oss.str();
 }

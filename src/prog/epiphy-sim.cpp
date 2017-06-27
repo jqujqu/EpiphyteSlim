@@ -40,8 +40,9 @@
 
 #include "PhyloTreePreorder.hpp"
 #include "param_set.hpp"
-#include "sufficient_statistics_helpers.hpp"
 #include "optimize_params.hpp"
+#include "sufficient_statistics_helpers.hpp"
+
 
 using std::string;
 using std::vector;
@@ -405,17 +406,24 @@ int main(int argc, const char **argv) {
   
       double llk = log_likelihood(subtree_sizes, ps, ss);
       cerr << "log_likelihood=" << llk << endl;
+
+      cerr << "-----------dinucleotide stats-----------" << endl;
+      vector<vector<double> > root_dinuc;
+      vector<vector<vector<double> > > pair_dinuc;
+      vector<size_t> parent_ids;
+      get_parent_id(subtree_sizes, parent_ids);
+      get_dinuc_stat(subtree_sizes, parent_ids, states,
+                     root_dinuc, pair_dinuc);
+      cerr << dinuc_stat_tostring(root_dinuc, pair_dinuc);
     }
 
     if (!leaf_only_file.empty()) {
       std::ofstream leaf_out(leaf_only_file.c_str());
-
       vector<string> leaf_names;
       t.get_leaf_names(leaf_names);
       copy(leaf_names.begin(), leaf_names.end(),
            ostream_iterator<string>(leaf_out, "\t"));
       leaf_out << endl;
-
       for (size_t i = 0; i < states.size(); ++i) {
         leaf_out << sites[i].chrom << '\t' << sites[i].pos;
         for (size_t j = 0; j < states[i].size(); ++j)

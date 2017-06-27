@@ -25,6 +25,7 @@
 class param_set;
 class triple_state;
 class pair_state;
+struct suff_stat;
 
 double
 log_likelihood(const std::vector<size_t> &subtree_sizes, const param_set &ps,
