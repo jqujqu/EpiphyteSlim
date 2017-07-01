@@ -51,7 +51,7 @@ CXXFLAGS += $(OPTFLAGS)
 endif
 
 COMMON_DIR = $(realpath ../common)
-INCLUDEDIRS = $(SMITHLAB_CPP) $(COMMON_DIR) ${TREETOOL} $(METHPIPE_DIR) ${BOOST} /usr/local/include
+INCLUDEDIRS = $(SMITHLAB_CPP) $(COMMON_DIR) $(TREETOOL) $(METHPIPE_DIR) $(BOOST) /usr/local/include
 INCLUDEARGS = $(addprefix -I, $(INCLUDEDIRS))
 
 all: $(PROGS)

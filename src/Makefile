@@ -43,7 +43,7 @@ install:
 
 test:
 	@for i in $(app_subdirs); do \
-	make -C $${i} SMITHLAB_CPP=$(SMITHLAB_CPP) TREETOOL=${TREETOOL} BOOST=$(BOOST) test; \
+	make -C $${i} SMITHLAB_CPP=$(SMITHLAB_CPP) TREETOOL=$(TREETOOL) BOOST=$(BOOST) test; \
 	done;
 
 clean:
