@@ -144,20 +144,12 @@ struct suff_stat {
   std::vector<pair_state> dyads;
   std::vector<triple_state> triads;
 
-  suff_stat() {}
-  
   suff_stat(const size_t n_nodes) {
     monad_root = std::make_pair(0.0, 0.0);
     dyad_root = pair_state();
     dyads = std::vector<pair_state>(n_nodes);
     triads = std::vector<triple_state>(n_nodes);
   }
-
-  suff_stat(const std::pair<double, double> &mr,
-            const pair_state &dr,
-            const std::vector<pair_state> &ds,
-            const std::vector<triple_state> &ts) :
-    monad_root(mr), dyad_root(dr), dyads(ds), triads(ts) {}
 
   std::string tostring() const {
     std::ostringstream oss;
