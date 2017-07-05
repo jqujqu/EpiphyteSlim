@@ -50,10 +50,6 @@ struct pair_state {
   double & operator()(int i, int j) { // version for r-values
     return (i == 0) ? (j == 0 ? uu : um) : (j == 0 ? mu : mm);
   }
-  void div(const double x) {
-    uu /= x; um /= x;
-    mu /= x; mm /= x;
-  }
   void to_probabilities() {
     const double u_denom = uu + um;
     uu /= u_denom;
