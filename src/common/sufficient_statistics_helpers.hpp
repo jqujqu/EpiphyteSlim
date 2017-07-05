@@ -112,26 +112,12 @@ struct triple_state {
     mmu /= mm_denom;
     mmm /= mm_denom;
   }
-  void div(const double x) {
-    uuu /= x; uum /= x;
-    umu /= x; umm /= x;
-
-    muu /= x; mum /= x;
-    mmu /= x; mmm /= x;
-  }
   void make_logs() {
     uuu = std::log(uuu); uum = std::log(uum);
     umu = std::log(umu); umm = std::log(umm);
 
     muu = std::log(muu); mum = std::log(mum);
     mmu = std::log(mmu); mmm = std::log(mmm);
-  }
-  void flatten(std::vector<double> &p) const {
-    p.clear();
-    p.push_back(uuu); p.push_back(uum);
-    p.push_back(umu); p.push_back(umm);
-    p.push_back(muu); p.push_back(mum);
-    p.push_back(mmu); p.push_back(mmm);
   }
   std::string tostring() const {
     std::ostringstream oss;
