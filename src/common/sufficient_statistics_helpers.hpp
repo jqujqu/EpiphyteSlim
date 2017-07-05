@@ -62,11 +62,6 @@ struct pair_state {
     uu = std::log(uu); um = std::log(um);
     mu = std::log(mu); mm = std::log(mm);
   }
-  void flatten(std::vector<double> &p) const {
-    p.clear();
-    p.push_back(uu); p.push_back(um);
-    p.push_back(mu); p.push_back(mm);
-  }
   std::string tostring() const {
     std::ostringstream oss;
     oss << "[" << uu << ", " << um << "]\n"
