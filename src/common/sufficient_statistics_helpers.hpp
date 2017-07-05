@@ -50,18 +50,6 @@ struct pair_state {
   double & operator()(int i, int j) { // version for r-values
     return (i == 0) ? (j == 0 ? uu : um) : (j == 0 ? mu : mm);
   }
-  pair_state operator+(const pair_state &other) const {
-    return pair_state(uu + other.uu, um + other.um,
-                      mu + other.mu, mm + other.mm);
-  }
-  pair_state operator-(const pair_state &other) const {
-    return pair_state(uu - other.uu, um - other.um,
-                      mu - other.mu, mm - other.mm);
-  }
-  pair_state operator*(const pair_state &other) const {
-    return pair_state(uu*other.uu, um*other.um,
-                      mu*other.mu, mm*other.mm);
-  }
   void operator+=(const pair_state &other) {
     uu += other.uu; um += other.um;
     mu += other.mu; mm += other.mm;
