@@ -91,13 +91,6 @@ is_root(const size_t node_id) {return node_id == 0;}
 inline bool
 is_leaf(const size_t subtree_size) {return subtree_size == 1;}
 
-inline bool
-is_binary(const vector<size_t> &subtree_sizes) {
-  // ADS: this function seems not to be used
-  return (subtree_sizes[0] == 1 + subtree_sizes[1] +
-          subtree_sizes[subtree_sizes[1] + 1]);
-}
-
 void
 subtree_sizes_to_leaves_preorder(const std::vector<size_t> &subtree_sizes,
                                  std::vector<size_t> &leaves_preorder);
