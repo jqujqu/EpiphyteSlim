@@ -162,13 +162,6 @@ struct triple_state {
     muu = std::log(muu); mum = std::log(mum);
     mmu = std::log(mmu); mmm = std::log(mmm);
   }
-  void flatten(std::vector<double> &p) const {
-    p.clear();
-    p.push_back(uuu); p.push_back(uum);
-    p.push_back(umu); p.push_back(umm);
-    p.push_back(muu); p.push_back(mum);
-    p.push_back(mmu); p.push_back(mmm);
-  }
   std::string tostring() const {
     std::ostringstream oss;
     oss << "u [" << uuu << ", " << uum << "]\n"
