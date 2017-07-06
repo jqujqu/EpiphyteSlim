@@ -51,10 +51,6 @@ struct pair_state {
     return (i == 0) ? (j == 0 ? uu : um) : (j == 0 ? mu : mm);
   }
 
-  pair_state operator+(const pair_state &other) const {
-    return pair_state(uu + other.uu, um + other.um,
-                      mu + other.mu, mm + other.mm);
-  }
   pair_state operator-(const pair_state &other) const {
     return pair_state(uu - other.uu, um - other.um,
                       mu - other.mu, mm - other.mm);
