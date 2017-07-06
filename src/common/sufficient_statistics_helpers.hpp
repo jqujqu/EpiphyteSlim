@@ -159,15 +159,6 @@ get_transition_matrices(const param_set &ps,
                         std::vector<pair_state> &P,
                         std::vector<triple_state> &GP);
 
-void
-get_transition_matrices_deriv(const param_set &ps,
-                              std::vector<pair_state> &P,
-                              std::vector<triple_state> &GP,
-                              std::vector<triple_state> &GP_drate,
-                              std::vector<triple_state> &GP_dg0,
-                              std::vector<triple_state> &GP_dg1,
-                              std::vector<triple_state> &GP_dT);
-
 /* The count_triads function resides in the header and not cpp file
    because it is templated. */
 template <class T>
@@ -199,7 +190,6 @@ get_suff_stat(const std::vector<size_t> &subtree_sizes,
   }
 }
 
-
 template <class T>
 static void
 get_dinuc_stat(const std::vector<size_t> &subtree_sizes,
@@ -222,37 +212,6 @@ get_dinuc_stat(const std::vector<size_t> &subtree_sizes,
     }
   }
 }
-
-
-template <class T>
-static void
-get_dinuc_stat(const std::vector<size_t> &subtree_sizes,
-               const std::vector<size_t> &parent_ids,
-               const std::vector<std::vector<T> > &tree_states,
-               const std::vector<std::pair<size_t, size_t> > &reset_points,
-               std::vector<std::vector<double> > &root_dinuc,
-               std::vector<std::vector<std::vector<double> > > &pair_dinuc) {
-  const size_t n_nodes = subtree_sizes.size();
-  root_dinuc = std::vector<std::vector<double> >(2, std::vector<double>(2, 0.0));
-  std::vector<std::vector<double> > pdtmp(4, std::vector<double>(4, 0.0));
-  pair_dinuc = std::vector<std::vector<std::vector<double> > >(n_nodes, pdtmp);
-  for (size_t i = 0; i < reset_points.size(); ++i) {
-    const size_t start = reset_points[i].first;
-    const size_t end = reset_points[i].second;
-    for (size_t pos = start ; pos < end - 1; ++pos) {
-      root_dinuc[tree_states[pos][0]][tree_states[pos+1][0]]++;
-      for (size_t node_id = 1; node_id < subtree_sizes.size(); ++node_id) {
-        const size_t parent_curr = tree_states[pos][parent_ids[node_id]];
-        const size_t parent_next = tree_states[pos+1][parent_ids[node_id]];
-        const size_t curr = tree_states[pos][node_id];
-        const size_t next = tree_states[pos+1][node_id];
-        pair_dinuc[node_id][2*parent_curr + parent_next][2*curr + next] += 1.0;
-      }
-    }
-  }
-}
-
-
 
 std::string
 dinuc_stat_tostring(const std::vector<std::vector<double> > &root_dinuc,
