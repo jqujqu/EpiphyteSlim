@@ -63,6 +63,18 @@ struct pair_state {
     return pair_state(uu*other.uu, um*other.um,
                       mu*other.mu, mm*other.mm);
   }
+  void operator+=(const pair_state &other) {
+    uu += other.uu; um += other.um;
+    mu += other.mu; mm += other.mm;
+  }
+  void operator/=(const pair_state &other) {
+    uu /= other.uu; um /= other.um;
+    mu /= other.mu; mm /= other.mm;
+  }
+  void div(const double x) {
+    uu /= x; um /= x;
+    mu /= x; mm /= x;
+  }
 
   void to_probabilities() {
     const double u_denom = uu + um;
