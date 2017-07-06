@@ -134,12 +134,6 @@ struct triple_state {
     muu += other.muu; mum += other.mum;
     mmu += other.mmu; mmm += other.mmm;
   }
-  void operator/=(const triple_state &other) {
-    uuu /= other.uuu; uum /= other.uum;
-    umu /= other.umu; umm /= other.umm;
-    muu /= other.muu; mum /= other.mum;
-    mmu /= other.mmu; mmm /= other.mmm;
-  }
   void to_probabilities() {
     const double uu_denom = uuu + uum;
     uuu /= uu_denom;
