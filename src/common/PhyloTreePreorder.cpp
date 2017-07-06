@@ -175,13 +175,6 @@ count_leaves(const vector<size_t> &subtree_sizes) {
   return n_leaf;
 }
 
-void
-get_children(const size_t node_id, const vector<size_t> &subtree_sizes,
-             vector<size_t> &children) {
-  for (size_t c = 1; c < subtree_sizes[node_id]; c += subtree_sizes[node_id + c])
-    children.push_back(node_id + c);
-}
-
 size_t
 leafsize(const vector<size_t> &subtree_sizes) {
   size_t n_leaf = 0;

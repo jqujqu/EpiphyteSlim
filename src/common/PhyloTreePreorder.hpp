@@ -104,10 +104,6 @@ is_semi_binary(const std::vector<size_t> &degrees);
 size_t
 count_leaves(const std::vector<size_t> &subtree_sizes);
 
-void
-get_children(const size_t node_id, const std::vector<size_t> &subtree_sizes,
-             std::vector<size_t> &children);
-
 size_t
 leafsize(const std::vector<size_t> &subtree_sizes);
 #endif
