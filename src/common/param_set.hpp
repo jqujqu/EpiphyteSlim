@@ -51,10 +51,6 @@ struct param_set {
             const std::vector<double> &_T) :
     pi0(_pi0), rate0(_rate0), g0(_g0), g1(_g1), T(_T) {}
 
-  param_set(const double _pi0, const double _rate0,
-            const std::vector<double> &_g0, const std::vector<double> &_g1) :
-    pi0(_pi0), rate0(_rate0), g0(_g0), g1(_g1) {}
-
   void assign_branches(PhyloTreePreorder &t) const;
 
   static double
