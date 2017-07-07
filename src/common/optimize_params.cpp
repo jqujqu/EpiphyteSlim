@@ -831,13 +831,3 @@ max_likelihood_params(const bool VERBOSE,
   }
 }
 
-
-// may get rid of  subtree_sizes
-void
-optimize_all_params(const bool VERBOSE,
-                    const size_t HORIZ_MODE,                      
-                    const vector<size_t> &subtree_sizes,
-                    const suff_stat &ss,
-                    param_set &ps) {
-  max_likelihood_params(VERBOSE, HORIZ_MODE, subtree_sizes, ss, ps);
-}
