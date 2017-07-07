@@ -119,11 +119,3 @@ param_set::tostring() const {
   return oss.str();
 }
 
-
-void
-param_set::assign_branches(PhyloTreePreorder &t) const {
-  vector<double> branches(T.size());
-  for (size_t i = 0; i < T.size(); ++i)
-    branches[i] = -log(1.0 - T[i]);
-  t.set_branch_lengths(branches);
-}

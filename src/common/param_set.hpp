@@ -51,8 +51,6 @@ struct param_set {
             const std::vector<double> &_T) :
     pi0(_pi0), rate0(_rate0), g0(_g0), g1(_g1), T(_T) {}
 
-  void assign_branches(PhyloTreePreorder &t) const;
-
   static double
   absolute_difference(const param_set &a, const param_set &b) {
     assert(a.T.size() == b.T.size());
