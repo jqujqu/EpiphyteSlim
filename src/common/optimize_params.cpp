@@ -69,47 +69,6 @@ log_likelihood(const vector<size_t> &subtree_sizes, const param_set &ps,
   return llk;
 }
 
-
-// where is this used?
-double
-log_likelihood(const vector<size_t> &subtree_sizes,
-               const suff_stat &ss) { // dim=[treesize x 2 x 2 x 2]
-  const size_t n_nodes = subtree_sizes.size();
-  const double denom = ss.monad_root.first + ss.monad_root.second;
-  std::pair<double, double> log_pi =
-    std::make_pair(log(ss.monad_root.first/denom),
-                   log(ss.monad_root.second/denom));
-  pair_state logG(ss.dyad_root);
-  logG.to_probabilities();
-  logG.make_logs();
-
-  std::vector<pair_state> logP;
-  std::vector<triple_state> logGP;
-  for (size_t i = 0; i < n_nodes; ++i) {
-    logP.push_back(ss.dyads[i]);
-    logP[i].to_probabilities();
-    logP[i].make_logs();
-    logGP.push_back(ss.triads[i]);
-    logGP[i].to_probabilities();
-    logGP[i].make_logs();
-  }
-
-  double llk =
-    (ss.monad_root.first*log_pi.first +
-     ss.monad_root.second*log_pi.second) + // ADS: is this right?
-    (ss.dyad_root(0, 0)*logG(0, 0) + ss.dyad_root(0, 1)*logG(0, 1) +
-     ss.dyad_root(1, 0)*logG(1, 0) + ss.dyad_root(1, 1)*logG(1, 1));
-
-  for (size_t node = 1; n_nodes; ++node)
-    for (size_t j = 0; j < 2; ++j)
-      for (size_t k = 0; k < 2; ++k) {
-        llk += ss.dyads[node](j, k)*logP[node](j, k);
-        for (size_t i = 0; i < 2; ++i)
-          llk += ss.triads[node](i, j, k)*logGP[node](i, j, k);
-      }
-  return llk;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 //////// Optimize inividual parameters to maximize log-likelihood  /////////////
 ////////////////////////////////////////////////////////////////////////////////

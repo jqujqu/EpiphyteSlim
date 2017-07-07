@@ -31,15 +31,6 @@ double
 log_likelihood(const std::vector<size_t> &subtree_sizes, const param_set &ps,
                const suff_stat &ss); 
 
-// double
-// log_likelihood(const std::vector<size_t> &subtree_sizes, const param_set &ps,
-//                const std::pair<double, double> &root_start_counts,
-//                const pair_state &root_counts,
-//                const std::vector<pair_state > &start_counts); // treesize x 2 x 2
-
-double
-log_likelihood(const std::vector<size_t> &subtree_sizes, const suff_stat &ss);
-
 void
 optimize_params(const bool VERBOSE, const size_t HORIZ_MODE,
                 const std::vector<size_t> &subtree_sizes, const suff_stat &ss,
