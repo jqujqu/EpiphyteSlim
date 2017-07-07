@@ -32,11 +32,6 @@ log_likelihood(const std::vector<size_t> &subtree_sizes, const param_set &ps,
                const suff_stat &ss); 
 
 void
-optimize_params(const bool VERBOSE, const size_t HORIZ_MODE,
-                const std::vector<size_t> &subtree_sizes, const suff_stat &ss,
-                param_set &ps);
-
-void
 max_likelihood_pi0(const bool VERBOSE, const suff_stat &ss, param_set &ps);
 
 void

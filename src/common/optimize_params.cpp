@@ -500,22 +500,6 @@ max_likelihood_pi0(const bool VERBOSE,
     cerr << "[max_likelihood_pi0: pi0=" << ps.pi0 << ']' << endl;
 }
 
-
-// may get rid of subtree_sizes
-// Optimize branch and rate parameters separately
-void
-optimize_params(const bool VERBOSE, const size_t HORIZ_MODE,
-                const vector<size_t> &subtree_sizes,
-                const suff_stat &ss,
-                param_set &ps) {
-  for (size_t node_id = 1; node_id < subtree_sizes.size(); ++node_id)
-    max_likelihood_branch(VERBOSE, subtree_sizes, node_id, ss, ps);
-  max_likelihood_rate(VERBOSE, subtree_sizes, ss, ps);
-  max_likelihood_pi0(VERBOSE, ss, ps);
-  max_likelihood_horiz(VERBOSE, HORIZ_MODE, subtree_sizes, ss, ps);
-}
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //////// Optimize by gradient ascent to maximize log-likelihood   //////////////
 ////////////////////////////////////////////////////////////////////////////////
