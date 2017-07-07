@@ -2,11 +2,11 @@
 
 # Epiphyte
 
-Epiphyte is a software package for estimating phylogenetic tree from epigenetic
+Epiphyte is a software package for estimating a phylogenetic tree from epigenetic
 modification (DNA methylation primarily) profiles of multiple species. It
 assumes
 
-  - known phylogenetic relationship between species
+  - known phylogenetic relationships (tree topology) between species
   - epigenetic modification has binary state
 
 
