@@ -18,6 +18,10 @@
 #
 
 
+ifndef METHPIPE_ROOT
+$(error METHPIPE_ROOT variable undefined)
+endif
+
 EPIPHYTE_ROOT = $(shell pwd)
 export PATH := $(shell pwd):$(PATH)
 BINDIR = $(EPIPHYTE_ROOT)/bin
