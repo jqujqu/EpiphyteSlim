@@ -65,8 +65,6 @@ using std::placeholders::_1;
 using std::bind;
 using std::plus;
 
-bool DEBUG = false;
-
 static void
 separate_regions(const size_t desert_size, vector<MSite> &sites,
                  vector<pair<size_t, size_t> > &blocks) {
@@ -172,7 +170,8 @@ expectation_step(const bool VERBOSE,
 
 template <class T>
 static void
-expectation_maximization(const bool VERBOSE,
+expectation_maximization(const bool DEBUG, // ADS: this should be removed soon
+                         const bool VERBOSE,
                          const bool OBS,
                          const size_t horiz_mode,
                          const size_t em_max_iterations,
@@ -299,21 +298,23 @@ main(int argc, const char **argv) {
 
     // run mode flags
     bool VERBOSE = false;
-    /* In sampling stage, change prev and next leaf states to
-       the closest observed sites' states */
+    bool DEBUG = false;
+
+    /* In sampling stage, change prev and next leaf states to the
+       closest observed sites' states */
     bool OBS = true;
     bool assume_complete_data = false;
     /* only burn in first EM iteration */
     bool first_only = false;
-    /* restart from a random sample point 
+    /* restart from a random sample point
        at the beginning of each EM iteration*/
     bool restart = false;
-    /* model of horizontal rates: 
-       1 same across all; 
+    /* model of horizontal rates:
+       1 same across all;
        2 root vs non-root
        3 node-specific */
     size_t horiz_mode = 2;
-    
+
     /********************* COMMAND LINE OPTIONS *******************************/
     OptionParser opt_parse(strip_path(argv[0]), "estimate parameters of "
                            "a phylo-epigenomic model"
@@ -493,12 +494,13 @@ main(int argc, const char **argv) {
       const epiphy_mcmc sampler(0);
       if (restart) sample_initial_states(rng_seed, tree_probs, tree_states);
 
-      expectation_maximization(VERBOSE, OBS, horiz_mode, em_max_iterations,
+      expectation_maximization(DEBUG,
+                               VERBOSE, OBS, horiz_mode, em_max_iterations,
                                opt_max_iterations, mh_max_iterations,
                                burnin, keep, sampler, first_only,
                                subtree_sizes, parent_ids,
                                tree_probs, blocks,
-                               params, ss, tree_states);  
+                               params, ss, tree_states);
     }
 
     if (DEBUG) {
