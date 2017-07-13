@@ -35,7 +35,7 @@ using std::placeholders::_1;
 using std::bind;
 using std::plus;
 
-static const double PROBABILITY_GUARD = 1e-10;
+// static const double PROBABILITY_GUARD = 1e-10;
 static const double CBM_THETA = 0.5;
 static const double CBM_EPS = 1e-4;
 
